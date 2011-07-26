@@ -1,20 +1,26 @@
-static const char *font        = "-*-terminus-medium-r-normal-*-14-*-*-*-*-*-*-*";
-static const char *normbgcolor = "#cccccc";
-static const char *normfgcolor = "#000000";
-static const char *selbgcolor  = "#0066ff";
-static const char *selfgcolor  = "#ffffff";
-static const char *before      = "<";
-static const char *after       = ">";
-static const int tabwidth      = 200;
+static const char font[]        = "-artwiz-cureextra-medium-r-normal--11-110-75-75-p-90-iso8859-1";
+static const char xtermfont[]   = "-nsb-lokaltog-medium-r-normal--10-100-75-75-c-60-iso10646-1";
+static const char homepage[]    = "www.google.de";
+static const char normbgcolor[] = "#000000"; 
+static const char normfgcolor[] = "#ffffff";
+static const char selbgcolor[]  = "#000000";
+static const char selfgcolor[]  = "#00aaff";
+static const char before[]      = "<";
+static const char after[]       = ">";
+static const int  tabwidth      = 200;
 static const Bool foreground   = False;
 
-#define MODKEY ControlMask
+static const char *termtab[]  = { "xterm", "-bc", "-bg", selbgcolor, "-cr" ,selfgcolor, "-fg", selfgcolor, "-fn", xtermfont, "-into", winid, NULL };
+static const char *surftab[]  = {  "surf", "-e", winid, homepage, NULL};
+
+#define MODKEY Mod4Mask
 static Key keys[] = { \
 	/* modifier                     key        function        argument */
 	{ MODKEY|ShiftMask,             XK_Return, focusonce,      { 0 } },
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          { .v = (char*[]){ "surf", "-e", winid, NULL} } },
-	{ MODKEY|ShiftMask,             XK_l,      rotate,         { .i = +1 } },
-	{ MODKEY|ShiftMask,             XK_h,      rotate,         { .i = -1 } },
+	{ MODKEY,                       XK_Return, spawn,          { .v = surftab } },
+	{ MODKEY|ShiftMask,             XK_Return, spawn,          { .v = termtab } },
+	{ MODKEY,                       XK_Right,  rotate,         { .i = +1 } },
+	{ MODKEY,                       XK_Left,   rotate,         { .i = -1 } },
 	{ MODKEY,                       XK_Tab,    rotate,         { .i = 0 } },
 	{ MODKEY,                       XK_1,      move,           { .i = 0 } },
 	{ MODKEY,                       XK_2,      move,           { .i = 1 } },
